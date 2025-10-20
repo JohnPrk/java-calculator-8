@@ -7,14 +7,18 @@ public class Calculator {
 
     private final DelimiterMapper delimiterMapper;
     private final DelimiterProcessor delimiterProcessor;
+    private final ExpressionValidator expressionValidator;
 
     public Calculator() {
         this.delimiterMapper = new DelimiterMapper();
         this.delimiterProcessor = new DelimiterProcessor(delimiterMapper);
+        this.expressionValidator = new ExpressionValidator();
     }
 
     public int calculate(String expression) {
+        expressionValidator.validateExpression(expression);
         Queue<String> tokens = delimiterProcessor.processExpression(expression);
+        expressionValidator.validateTokens(tokens);
         return evaluateExpression(tokens);
     }
 
