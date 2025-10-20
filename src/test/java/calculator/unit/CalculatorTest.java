@@ -44,4 +44,22 @@ public class CalculatorTest {
     void calculateWithDigitNumbersAndCustomAndMixedDelimiters() {
         Assertions.assertThat(calculator.calculate("//;\\n1,2;3:4")).isEqualTo(10);
     }
+
+    @Test
+    @DisplayName("구분자 없이 양수만 입력되었을 경우 경우 양수의 값을 반환한다.")
+    void returnNumberInCaseOfOnlyInputNumber() {
+        Assertions.assertThat(calculator.calculate("1")).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("예외적으로 빈 값이 입력되었을 경우 0을 반환한다.")
+    void returnZeroInCaseOfInputIsBlank() {
+        Assertions.assertThat(calculator.calculate("")).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자를 등록했지만 구분자 없이 양수만 입력되었을 경우 양수의 값을 반환한다.")
+    void returnNumberDespiteNotEnrolledCustomDelimitersOnlyNumber() {
+        Assertions.assertThat(calculator.calculate("//;\\n11")).isEqualTo(11);
+    }
 }

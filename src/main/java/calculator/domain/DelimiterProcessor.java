@@ -36,6 +36,10 @@ public class DelimiterProcessor {
 
     private Queue<String> parseTokens(String expression) {
         Queue<String> tokens = new LinkedList<>();
+        if (expression.getBytes().length == 1) {
+            tokens.add(expression);
+            return tokens;
+        }
         StringBuilder numberBuffer = new StringBuilder();
         for (char c : expression.toCharArray()) {
             String character = String.valueOf(c);
